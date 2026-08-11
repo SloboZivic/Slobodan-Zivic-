@@ -433,7 +433,7 @@ main p {
       }
 
 .landing-text p {
-  font-size: 12px;
+  font-size: 13px;
 }
 
 
@@ -448,7 +448,7 @@ main p {
 
   .header-center {
     order: 3;
-    font-size: 15px;
+    font-size: 14px;
     flex-basis: 100%;
     text-align: left;
     margin-top: 8px;
@@ -456,13 +456,20 @@ main p {
 
   .header-right a {
     margin-left: 12px;
-    font-size: 15px;
+    font-size: 14px;
   }
 
   main {
     padding: 16px;
     padding-top: 26px;
+    font-size: 14px;
   }
+
+  p {
+    font-size: 14px;
+  }
+
+ 
 
   .marquee-track {
   display: inline-flex;
