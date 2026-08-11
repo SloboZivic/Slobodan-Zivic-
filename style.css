@@ -23,7 +23,7 @@ a {
       position: fixed;
       inset: 0;
       background-color: #fff;
-      background-image: url("img/landing.jpg");
+      background-image: url("img/landing.webp");
       background-size: cover;
       background-position: center;
       z-index: 1000;
