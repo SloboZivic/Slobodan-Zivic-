@@ -436,6 +436,10 @@ main p {
   font-size: 13px;
 }
 
+.landing .qr {
+  top: 16px;
+  left: 16px;
+}
 
 
 
@@ -515,7 +519,7 @@ main p {
   .exhibit-table td:last-child {
     display: inline;
     text-align: left;
-    font-size: 13px;
+    font-size: 14px;
     margin-left: 0px;
   }
 
