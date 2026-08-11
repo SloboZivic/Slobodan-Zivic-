@@ -244,11 +244,7 @@ main p {
   background: #EFEEEE;
 }
 
-/* the exhibition list's columns are locked to fixed widths on desktop
-   (so opening a wide gallery row can't reflow the table and nudge every
-   row's year column sideways) — the widths themselves live here instead
-   of as inline styles on the <col> tags, so the mobile media query below
-   can switch them off again */
+/*  */
 .accordion-table {
   table-layout: fixed;
 }
@@ -261,11 +257,7 @@ main p {
   width: 130px;
 }
 
-/* each entry in the exhibition list is actually TWO <tr>s
-   (the visible row, then its hidden detail row right after it), so
-   counting "every other row" would count the hidden ones too and throw
-   the stripes off. Instead we stripe every other PAIR — rows 1, 5, 9...
-   — and turn the generic rule above off inside this table. */
+/* */
 .accordion-table tr:nth-child(even) {
   background: none;
 }
@@ -274,9 +266,7 @@ main p {
   background: #eee;
 }
 
-/* exhibition titles read in caps, everything else in the row stays as typed —
-   this targets both the exhibition list (index.html) and Curatorial Works,
-   since both use the .exhibit-row class on their title cells */
+/*  */
 .exhibit-row td:first-child {
   text-transform: uppercase;
   font-size: 13px;
@@ -376,7 +366,7 @@ main p {
 
 .exhibit-side-text {
   margin-left: auto;
-  text-align: right;
+  text-align: left;
 
 }
 
