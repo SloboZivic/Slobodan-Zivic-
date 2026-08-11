@@ -1,0 +1,600 @@
+/* ---------- basic reset ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Times New Roman", Times, serif;
+  color: #000;
+  background: #fff;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* ---------- landing screen (overlay on top of index.html) ---------- */
+
+    .landing {
+      position: fixed;
+      inset: 0;
+      background-color: #fff;
+      background-image: url("img/landing.jpg");
+      background-size: cover;
+      background-position: center;
+      z-index: 1000;
+      clip-path: inset(0 0 0 0);
+    }
+
+    /* added by JS when ENTER is clicked — clips the overlay away
+       instantly, no animation, so it just snaps open */
+    .landing.landing--hidden {
+      clip-path: inset(0 0 100% 0);
+      pointer-events: none;
+    }
+
+    /* keeps the page underneath from scrolling while the splash is up */
+    body.landing-visible {
+      overflow: hidden;
+    }
+
+    /* returning visitors this session skip the splash entirely — this is
+       set by the inline script at the top of <body>, before the overlay
+       below even gets parsed, so there's no flash of it appearing */
+    html.skip-landing .landing {
+      display: none;
+    }
+
+    .landing .qr {
+      position: absolute;
+      top: 20px;
+      left: 24px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .landing-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .landing-text a {
+      display: block;
+      color: #2222dd;
+      font-weight: bold;
+      font-size: 18px;
+      font-family: arial, sans-serif;
+      text-decoration: none;
+      margin-bottom: 8px;
+    }
+
+    .landing-text a:hover {
+      text-decoration: underline;
+    }
+
+    .landing-text p {
+      color: #000;
+      margin: 0;
+      font-size: 13px;
+    }
+
+/* ---------- header ---------- */
+
+.site-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 10px;
+}
+
+.site-header .qr {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.header-left .name {
+  font-size: 20px;
+  line-height: 0.95;
+  letter-spacing: -0.3px;
+}
+
+.namebreak {display: none}
+
+.header-center {
+  flex: 1;
+  text-align: center;
+ 
+  line-height: 1.3;
+}
+
+.header-right {
+  flex: 1;
+  text-align: right;
+}
+
+.header-right a {
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+/* current page link */
+.header-right a.current {
+  text-decoration: underline;
+}
+
+/* the logo + name in the top left is one big link back to the homepage,
+   but it should look exactly like plain text — no underline, no color change */
+.header-left {
+  text-decoration: none;
+}
+
+/* ---------- marquee ---------- */
+
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  padding: 6px 0;
+}
+
+.marquee-track {
+  display: inline-flex;
+  animation: scroll-left 45s linear infinite;
+}
+
+.marquee-track a {
+  padding: 0 4px;
+  text-decoration: npone;
+  text-transform: uppercase;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* pause the scroll when hovering, so people can actually click it */
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* track is duplicated in the HTML, so -50% is exactly one full loop */
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- page content ---------- */
+
+main {
+  padding: 24px;
+}
+
+main h1 {
+  font-size: 17px;
+  font-weight: normal;
+  text-transform: uppercase;
+  margin: 20px 0 10px;
+}
+
+main p {
+  max-width: 900px;
+  margin: 0 0 24px;
+  line-height: 1.1;
+}
+
+.project-image {
+  max-width: 800px;
+  width: 100%;
+  display: block;
+}
+
+/* ---------- exhibition table ---------- */
+
+.exhibit-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.exhibit-table th {
+  text-align: left;
+  font-weight: bold;
+  padding: 6px 0px;
+}
+
+.exhibit-table th:last-child,
+.exhibit-table td:last-child {
+  text-align: left;
+}
+
+/* only the visible summary row's year column should refuse to wrap —
+   the hidden detail row underneath is a single <td colspan="3"> holding
+   a whole paragraph, and it also happens to be a "last-child", so this
+   rule must NOT apply there or long text gets pushed off-screen instead
+   of wrapping */
+.exhibit-row td:last-child {
+  white-space: nowrap;
+}
+
+.exhibit-table td {
+  padding: 8px 10px;
+}
+
+/* alternating stripes */
+.exhibit-table tr:nth-child(even) {
+  background: #EFEEEE;
+}
+
+/* the exhibition list's columns are locked to fixed widths on desktop
+   (so opening a wide gallery row can't reflow the table and nudge every
+   row's year column sideways) — the widths themselves live here instead
+   of as inline styles on the <col> tags, so the mobile media query below
+   can switch them off again */
+.accordion-table {
+  table-layout: fixed;
+}
+
+.accordion-table .col-title {
+  width: 34%;
+}
+
+.accordion-table .col-year {
+  width: 130px;
+}
+
+/* each entry in the exhibition list is actually TWO <tr>s
+   (the visible row, then its hidden detail row right after it), so
+   counting "every other row" would count the hidden ones too and throw
+   the stripes off. Instead we stripe every other PAIR — rows 1, 5, 9...
+   — and turn the generic rule above off inside this table. */
+.accordion-table tr:nth-child(even) {
+  background: none;
+}
+
+.accordion-table tr.exhibit-row:nth-of-type(4n+1) {
+  background: #eee;
+}
+
+/* exhibition titles read in caps, everything else in the row stays as typed —
+   this targets both the exhibition list (index.html) and Curatorial Works,
+   since both use the .exhibit-row class on their title cells */
+.exhibit-row td:first-child {
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+/* every exhibition row can be clicked to open its detail row below it */
+.exhibit-row {
+  cursor: pointer;
+}
+
+.accordion-table tr.exhibit-row:hover {
+  background: #ddd;
+}
+
+/* while a row's detail is open, keep it the same darker grey as the
+   hover state, so it's clear which entry is currently expanded even
+   after the mouse moves away */
+.accordion-table tr.exhibit-row.active {
+  background: #ddd;
+}
+
+/* the hidden row holding the gallery + caption for one exhibition —
+   stays collapsed until JS adds the "open" class */
+.exhibit-detail {
+  display: none;
+}
+
+.exhibit-detail.open {
+  display: table-row;
+}
+
+/* photo grid that sits under an exhibition entry — every image is the
+   same HEIGHT, and its width is whatever that height works out to given
+   the image's own proportions (a "contact sheet" layout). This is the
+   flexbox equivalent of the old CSS Grid version, but without cropping:
+   nothing stretches or gets cut, images just wrap onto a new row once
+   the current one runs out of space. The last row of an entry may not
+   reach the full width — that's expected with this layout, not a bug. */
+.exhibit-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 4px 0 16px;
+}
+
+.exhibit-gallery img {
+  height: 440px;
+  width: auto;
+  flex: 0 0 auto;
+  display: block;
+}
+
+/* the "Group Show: Downtown Issue III / Title: Settle 2 Belong..." text under a gallery */
+.exhibit-caption {
+  margin: 0 0 24px;
+  font-size: 15px;
+}
+
+.exhibit-caption p {
+  margin: 2px 0;
+}
+
+/* responsive video embed for the Direction table — keeps a 16:9 shape
+   at any width, same idea as the 4:3 crop on the photo galleries */
+.exhibit-video {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 16 / 9;
+  margin: 4px 0 16px;
+}
+
+.exhibit-video iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+}
+
+/* image on the left, text on the right — used for the Curatorial Works
+   entries, which are already expanded by default instead of needing a
+   click (same underlying .exhibit-row / .exhibit-detail structure and
+   accordion JS as the exhibition list, just started in the "open" state) */
+.exhibit-side {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
+  margin: 4px 0 16px;
+}
+
+.exhibit-side img {
+  width: 280px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.exhibit-side-text {
+  margin-left: auto;
+  text-align: right;
+
+}
+
+.exhibit-side-text p {
+  margin: 2px 0;
+}
+
+/* Curatorial Works isn't interactive like the exhibition list — every
+   row stays the same grey (no alternating stripe), and the pointer
+   cursor / hover-darkening from the accordion behavior are switched
+   off here specifically. The #curatorial-list id gives these enough
+   specificity to win over the shared .accordion-table rules. */
+#curatorial-list tr.exhibit-row {
+  background: #eee;
+  cursor: default;
+}
+
+#curatorial-list tr.exhibit-row:hover {
+  background: #eee;
+}
+
+/* ---------- footer ---------- */
+
+.site-footer {
+  border-top: 1px solid #000;
+  padding: 20px 24px;
+  font-size: 14px;
+}
+
+.site-footer h2 {
+  font-size: 16px;
+  margin: 0 0 12px;
+}
+
+.site-footer a {
+  color: #2222dd;
+}
+
+.site-footer .fine-print {
+  margin-top: 16px;
+  font-size: 12px;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+/* ---------- mobile ---------- */
+
+@media (max-width: 600px) {
+  .site-header {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 16px 16px 8px;
+  }
+
+     .landing-text {
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+.landing-text p {
+  font-size: 12px;
+}
+
+
+
+
+.header-left .name {
+  font-size: 20px;
+  line-height: 0.9;
+}
+
+.namebreak {display:block;}
+
+  .header-center {
+    order: 3;
+    font-size: 15px;
+    flex-basis: 100%;
+    text-align: left;
+    margin-top: 8px;
+  }
+
+  .header-right a {
+    margin-left: 12px;
+    font-size: 15px;
+  }
+
+  main {
+    padding: 16px;
+    padding-top: 26px;
+  }
+
+  .marquee-track {
+  display: inline-flex;
+  animation: scroll-left 25s linear infinite;
+}
+
+  .marquee-track a {
+    pointer-events: auto;
+  }
+
+  /* smaller row height on mobile so more than one image still fits
+     per row on a narrow screen */
+  .exhibit-gallery img {
+    height: 130px;
+  }
+
+  main h1 {
+    font-size: 15px;
+  }
+
+
+
+
+.exhibit-gallery img {
+  max-width: 100%;
+  
+  flex: 0 0 auto;
+  display: block;
+}
+
+  .exhibit-table th {
+    padding:0px;
+    padding-bottom: 6px;
+   
+  }
+
+  .exhibit-table td {
+    display: block;
+    font-size: 15px;
+    padding: 8px 0px;
+  }
+
+  .exhibit-table td:last-child {
+    display: inline;
+    text-align: left;
+    font-size: 13px;
+    margin-left: 0px;
+  }
+
+  /*  */
+  .accordion-table,
+  .accordion-table thead,
+  .accordion-table tbody,
+  .accordion-table thead tr {
+    display: block;
+    width: 100%;
+  }
+
+  /* only the first header label ("Exhibition") is real text — the other
+     two <th> cells are empty placeholders for the venue/year columns
+     and don't need to render as anything on mobile */
+  .accordion-table thead th:nth-child(2),
+  .accordion-table thead th:nth-child(3) {
+    display: none;
+  }
+
+  /* the fixed column widths are a desktop-only trick — on mobile the
+     title needs to use the full row width instead of being squeezed
+     into its 34% desktop column, or it wraps onto a dozen lines */
+  .accordion-table {
+    table-layout: auto;
+  }
+
+  .accordion-table .col-title,
+  .accordion-table .col-year {
+    width: auto;
+  }
+
+  /* exhibition list only: drop the venue column entirely on mobile,
+     so each row is just "TITLE (year)" on a single line  */
+  .accordion-table tr.exhibit-row {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+  }
+
+  .accordion-table tr.exhibit-row td {
+    display: inline;
+    padding: 0;
+  }
+
+  .accordion-table tr.exhibit-row td:nth-child(2) {
+    display: none;
+  }
+
+  /* the gallery/caption detail row also needs to drop its table-row
+     display now that the table itself is no longer a real table on
+     mobile — otherwise it's a stray table-row with no table to belong to */
+  .accordion-table .exhibit-detail.open {
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .accordion-table .exhibit-detail td {
+    display: block;
+  }
+
+  .site-footer {
+    padding: 16px;
+  }
+
+  .exhibit-side img {
+    width: 100%;
+  }
+
+  .exhibit-side {
+  flex-direction: column;
+}
+
+.exhibit-side-text {
+  margin-left: 0;
+  text-align: left;
+}
+}
