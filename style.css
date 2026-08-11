@@ -574,8 +574,8 @@ main p {
      mobile — otherwise it's a stray table-row with no table to belong to */
   .accordion-table .exhibit-detail.open {
     display: block;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 7px;
+    padding-right: 7px;
   }
 
   .accordion-table .exhibit-detail td {
