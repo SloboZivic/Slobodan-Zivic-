@@ -282,8 +282,7 @@ main p {
 }
 
 /* while a row's detail is open, keep it the same darker grey as the
-   hover state, so it's clear which entry is currently expanded even
-   after the mouse moves away */
+   hover state */
 .accordion-table tr.exhibit-row.active {
   background: #ddd;
 }
@@ -299,12 +298,7 @@ main p {
 }
 
 /* photo grid that sits under an exhibition entry — every image is the
-   same HEIGHT, and its width is whatever that height works out to given
-   the image's own proportions (a "contact sheet" layout). This is the
-   flexbox equivalent of the old CSS Grid version, but without cropping:
-   nothing stretches or gets cut, images just wrap onto a new row once
-   the current one runs out of space. The last row of an entry may not
-   reach the full width — that's expected with this layout, not a bug. */
+   same HEIGHT */
 .exhibit-gallery {
   display: flex;
   flex-wrap: wrap;
@@ -329,8 +323,7 @@ main p {
   margin: 2px 0;
 }
 
-/* responsive video embed for the Direction table — keeps a 16:9 shape
-   at any width, same idea as the 4:3 crop on the photo galleries */
+/* responsive video embed  */
 .exhibit-video {
   position: relative;
   width: 100%;
@@ -346,10 +339,7 @@ main p {
   border: 0;
 }
 
-/* image on the left, text on the right — used for the Curatorial Works
-   entries, which are already expanded by default instead of needing a
-   click (same underlying .exhibit-row / .exhibit-detail structure and
-   accordion JS as the exhibition list, just started in the "open" state) */
+/* image on the left, text on the right  */
 .exhibit-side {
   display: flex;
   flex-direction: row;
@@ -374,11 +364,7 @@ main p {
   margin: 2px 0;
 }
 
-/* Curatorial Works isn't interactive like the exhibition list — every
-   row stays the same grey (no alternating stripe), and the pointer
-   cursor / hover-darkening from the accordion behavior are switched
-   off here specifically. The #curatorial-list id gives these enough
-   specificity to win over the shared .accordion-table rules. */
+/* Curatorial Works isn't interactive like the exhibition list  */
 #curatorial-list tr.exhibit-row {
   background: #eee;
   cursor: default;
@@ -399,6 +385,28 @@ main p {
 .site-footer h2 {
   font-size: 16px;
   margin: 0 0 12px;
+}
+
+/* hovering "Contact" reveals a small photo above it */
+.contact-hover {
+  position: relative;
+  display: inline-block;
+}
+
+.contact-photo {
+  position: absolute;
+  bottom: 100%;
+  left: 60px;
+  margin-bottom: 8px;
+  width: 140px;
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.contact-hover:hover .contact-photo {
+  opacity: 1;
 }
 
 .site-footer a {
@@ -469,8 +477,9 @@ main p {
     font-size: 14px;
   }
 
-  p {
+  main p {
     font-size: 14px;
+    line-height: 1.2;
   }
 
  
@@ -487,7 +496,7 @@ main p {
   /* smaller row height on mobile so more than one image still fits
      per row on a narrow screen */
   .exhibit-gallery img {
-    height: 130px;
+    height: 190px;
   }
 
   main h1 {
