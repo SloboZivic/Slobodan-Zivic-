@@ -82,7 +82,7 @@ a {
     .landing-text p {
       color: #000;
       margin: 0;
-      font-size: 13px;
+      font-size: 14px;
     }
 
 /* ---------- header ---------- */
@@ -422,7 +422,7 @@ main p {
       }
 
 .landing-text p {
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .landing .qr {
