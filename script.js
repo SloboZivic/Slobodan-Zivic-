@@ -73,6 +73,19 @@ function setupExhibitAccordion() {
   });
 }
 
+// the landing splash randomly shows one of two background photos each
+// time the page loads — CSS can't do randomness, so this sets it as an
+// inline style, which always wins over the (removed) CSS background-image
+function setupLandingBackground() {
+  const landing = document.getElementById("landing-screen");
+  if (!landing) return;
+
+  const images = ["img/un_named.webp", "img/landing.jpg"];
+  const chosen = images[Math.floor(Math.random() * images.length)];
+
+  landing.style.backgroundImage = `url("${chosen}")`;
+}
+
 // the landing splash sits on top of the page as a fixed overlay — clicking
 // ENTER fades it out (via CSS transition) and lets scroll/clicks reach the
 // page underneath, instead of navigating to a separate file
@@ -92,4 +105,5 @@ function setupLandingScreen() {
 startClock();
 setupMarquee();
 setupExhibitAccordion();
+setupLandingBackground();
 setupLandingScreen();
