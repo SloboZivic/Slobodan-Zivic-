@@ -68,7 +68,7 @@ a {
     .landing-text a {
       display: block;
       color: #2222dd;
-      font-weight: lighter;
+      font-weight: light;
       font-size: 18px;
 
       text-decoration: none;
@@ -423,6 +423,10 @@ main p {
 
 .landing-text p {
   font-size: 14px;
+}
+
+.landing-text a {
+  font-size: 20px;
 }
 
 .landing .qr {
