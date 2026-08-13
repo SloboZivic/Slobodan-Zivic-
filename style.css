@@ -417,6 +417,8 @@ main p {
   justify-content: center;
   background: none;
   border: none;
+  color: #111;
+  opacity: 0.9;
   cursor: pointer;
   padding: 0;
 }
@@ -646,6 +648,8 @@ main p {
   font-size: 33px;
   line-height: 1;
   display: flex;
+  color: #111;
+  opacity: 0.9;
   align-items: center;
   justify-content: center;
   background: none;
