@@ -374,6 +374,53 @@ main p {
   background: #eee;
 }
 
+/* ---------- lightbox (click any artwork photo to see it larger) ---------- */
+
+.exhibit-gallery img,
+.exhibit-side img {
+  cursor: zoom-in;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(250, 250, 250, 0.9);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.lightbox.open {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 10px;
+  right: 14px;
+  width: 54px;
+  height: 54px;
+  font-family: 'times new roman', serif;
+  font-size: 40px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
 /* ---------- footer ---------- */
 
 .site-footer {
@@ -583,6 +630,30 @@ main p {
   .exhibit-side img {
     width: 100%;
   }
+
+  .lightbox {
+    padding: 16px;
+  }
+
+
+   .lightbox-close {
+  position: fixed;
+  top: 14px;
+  right: 5px;
+  width: 34px;
+  height: 34px;
+  font-family: 'times new roman', serif;
+  font-size: 33px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+  
 
   .exhibit-side {
   flex-direction: column;

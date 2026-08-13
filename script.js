@@ -80,7 +80,7 @@ function setupLandingBackground() {
   const landing = document.getElementById("landing-screen");
   if (!landing) return;
 
-  const images = ["img/un_named.webp", "img/landing.jpg"];
+  const images = ["img/un_named.webp", "img/landin.webp"];
   const chosen = images[Math.floor(Math.random() * images.length)];
 
   landing.style.backgroundImage = `url("${chosen}")`;
@@ -102,8 +102,49 @@ function setupLandingScreen() {
   });
 }
 
+// click any artwork photo (in a gallery or curatorial entry) to see it
+// larger over a dark overlay. Close with the × button, clicking outside
+// the image, or pressing Escape.
+function setupLightbox() {
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImage = document.getElementById("lightbox-image");
+  const closeButton = document.getElementById("lightbox-close");
+  if (!lightbox || !lightboxImage || !closeButton) return;
+
+  const clickableImages = document.querySelectorAll(
+    ".exhibit-gallery img, .exhibit-side img"
+  );
+
+  function openLightbox(src, alt) {
+    lightboxImage.src = src;
+    lightboxImage.alt = alt || "";
+    lightbox.classList.add("open");
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("open");
+    lightboxImage.src = "";
+  }
+
+  clickableImages.forEach((img) => {
+    img.addEventListener("click", () => openLightbox(img.src, img.alt));
+  });
+
+  closeButton.addEventListener("click", closeLightbox);
+
+  // clicking the dark background (not the image itself) also closes it
+  lightbox.addEventListener("click", (event) => {
+    if (event.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeLightbox();
+  });
+}
+
 startClock();
 setupMarquee();
 setupExhibitAccordion();
 setupLandingBackground();
 setupLandingScreen();
+setupLightbox();
