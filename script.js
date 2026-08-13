@@ -32,6 +32,12 @@ function setupMarquee() {
   }
 
   track.innerHTML += track.innerHTML;
+
+  // the CSS animation starts paused (see .marquee-track in style.css) so
+  // its 45s/25s timer doesn't begin ticking against the original,
+  // un-duplicated track — only once the content above is finalized do we
+  // let it start, so the -50% loop point is correct from the very first frame
+  track.style.animationPlayState = "running";
 }
 
 // exhibition table: clicking a row opens its detail row (gallery + caption)

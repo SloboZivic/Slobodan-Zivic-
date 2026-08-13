@@ -155,6 +155,11 @@ a {
 .marquee-track {
   display: inline-flex;
   animation: scroll-left 45s linear infinite;
+  /* starts paused so the CSS timer doesn't begin ticking before JS has
+     duplicated the track content — JS un-pauses it once setup is done,
+     avoiding the little jump/hitch that happened when the animation's
+     -50% endpoint was recalculated mid-run against a suddenly wider track */
+  animation-play-state: paused;
 }
 
 .marquee-track a {
@@ -521,6 +526,7 @@ main p {
   .marquee-track {
   display: inline-flex;
   animation: scroll-left 25s linear infinite;
+  animation-play-state: paused;
 }
 
   .marquee-track a {
