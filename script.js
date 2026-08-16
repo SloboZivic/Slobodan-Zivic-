@@ -18,8 +18,7 @@ function startClock() {
 
 // the marquee only needs ONE link written in the HTML — this fills the
 // track with just enough copies to overflow the screen, then duplicates
-// that whole block once more, so the CSS animation (which slides exactly
-// -50%) always loops with no gap, no matter how wide the screen is
+
 function setupMarquee() {
   const track = document.getElementById("marquee-track");
   if (!track) return;
@@ -35,15 +34,13 @@ function setupMarquee() {
 
   // the CSS animation starts paused (see .marquee-track in style.css) so
   // its 45s/25s timer doesn't begin ticking against the original,
-  // un-duplicated track — only once the content above is finalized do we
-  // let it start, so the -50% loop point is correct from the very first frame
+
   track.style.animationPlayState = "running";
 }
 
 // exhibition table: clicking a row opens its detail row (gallery + caption)
 // right underneath it. Clicking that same row again closes it, and clicking
 // a different row closes whichever one was open and opens the new one —
-// only one entry is ever expanded at a time.
 function setupExhibitAccordion() {
   const rows = document.querySelectorAll(".exhibit-row");
   let openDetail = null;

@@ -279,6 +279,17 @@ main p {
 /* every exhibition row can be clicked to open its detail row below it */
 .exhibit-row {
   cursor: pointer;
+  scroll-margin-top: 100px;
+}
+
+/* position:relative lives on the year cell rather than the <tr> itself —
+   putting it on the row was destabilizing the table's overall width on
+   wide screens (some browsers handle position on table rows oddly), and
+   since the year column is already the rightmost one, anchoring the
+   chevron here achieves the same "pinned to the row's right edge" look
+   without touching how the row itself gets sized */
+.exhibit-row td:last-child {
+  position: relative;
 }
 
 .accordion-table tr.exhibit-row:hover {
@@ -291,6 +302,24 @@ main p {
   background: #ddd;
 }
 
+/* small up-chevron, only while the row is expanded — a visual cue that
+   clicking again folds it back up. Pinned to the right edge of the year
+   cell (the last, rightmost column), so it reads as sitting at the
+   row's right edge without needing position on the <tr> itself. Uses
+   the site's own serif font instead of a drawn icon, to match the
+   Times New Roman feel of everything else on the page. */
+.exhibit-row.active td:last-child::after {
+  content: "\2303";
+  position: absolute;
+  right: 10px;
+  top: 65%;
+  transform: translateY(-50%);
+  font-family: "Times New Roman", Times, serif;
+  font-size: 18px;
+  opacity: 0.6;
+  font-weight:200;
+}
+
 /* the hidden row holding the gallery + caption for one exhibition —
    stays collapsed until JS adds the "open" class */
 .exhibit-detail {
@@ -299,6 +328,13 @@ main p {
 
 .exhibit-detail.open {
   display: table-row;
+}
+
+/* a bit of extra breathing room above the expanded content, so the row
+   you clicked stays visible right above it — reinforces that this is
+   content unfolding on the same page, not a jump to a new one */
+.exhibit-detail td {
+  padding-top: 20px;
 }
 
 /* photo grid that sits under an exhibition entry — every image is the
@@ -565,12 +601,22 @@ main p {
     padding: 8px 0px;
   }
 
-  .exhibit-table td:last-child {
-    display: inline;
-    text-align: left;
-    font-size: 14px;
-    margin-left: 0px;
-  }
+.accordion-table tr.exhibit-row td:last-child {
+  display: inline-block;
+  text-align: left;
+  font-size: 14px;
+  margin-left: 0px;
+}
+
+.accordion-table tr.exhibit-row {
+  position: relative;
+}
+
+.accordion-table tr.exhibit-row td:last-child {
+  position: static;
+}
+
+
 
   /*  */
   .accordion-table,
@@ -618,6 +664,7 @@ main p {
     display: none;
   }
 
+
   /* the gallery/caption detail row also needs to drop its table-row
      display now that the table itself is no longer a real table on
      mobile — otherwise it's a stray table-row with no table to belong to */
@@ -629,6 +676,7 @@ main p {
 
   .accordion-table .exhibit-detail td {
     display: block;
+    padding-top: 20px;
   }
 
   .site-footer {
