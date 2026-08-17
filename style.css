@@ -501,7 +501,7 @@ main p {
     align-items: flex-start;
     flex-wrap: wrap;
     padding: 16px 16px 8px;
-    font-size: 15px;
+    font-size: 16px;
   }
 
      .landing-text {
@@ -557,6 +557,10 @@ main p {
     max-width: 100%;
   }
 
+  .biography {
+    font-size: 16px;
+  }
+
  
 
   .marquee-track {
@@ -592,6 +596,7 @@ main p {
   .exhibit-table th {
     padding:0px;
     padding-bottom: 6px;
+    font-size: 16px;
    
   }
 
