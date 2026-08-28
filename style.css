@@ -282,16 +282,6 @@ main p {
   scroll-margin-top: 100px;
 }
 
-/* position:relative lives on the year cell rather than the <tr> itself —
-   putting it on the row was destabilizing the table's overall width on
-   wide screens (some browsers handle position on table rows oddly), and
-   since the year column is already the rightmost one, anchoring the
-   chevron here achieves the same "pinned to the row's right edge" look
-   without touching how the row itself gets sized */
-.exhibit-row td:last-child {
-  position: relative;
-}
-
 .accordion-table tr.exhibit-row:hover {
   background: #ddd;
 }
@@ -300,24 +290,6 @@ main p {
    hover state */
 .accordion-table tr.exhibit-row.active {
   background: #ddd;
-}
-
-/* small up-chevron, only while the row is expanded — a visual cue that
-   clicking again folds it back up. Pinned to the right edge of the year
-   cell (the last, rightmost column), so it reads as sitting at the
-   row's right edge without needing position on the <tr> itself. Uses
-   the site's own serif font instead of a drawn icon, to match the
-   Times New Roman feel of everything else on the page. */
-.exhibit-row.active td:last-child::after {
-  content: "\2303";
-  position: absolute;
-  right: 10px;
-  top: 65%;
-  transform: translateY(-50%);
-  font-family: "Times New Roman", Times, serif;
-  font-size: 18px;
-  opacity: 0.6;
-  font-weight:lighter;
 }
 
 /* the hidden row holding the gallery + caption for one exhibition —
@@ -611,14 +583,6 @@ main p {
   text-align: left;
   font-size: 16px;
   margin-left: 0px;
-}
-
-.accordion-table tr.exhibit-row {
-  position: relative;
-}
-
-.accordion-table tr.exhibit-row td:last-child {
-  position: static;
 }
 
 
