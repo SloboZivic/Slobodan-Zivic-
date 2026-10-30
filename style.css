@@ -17,7 +17,7 @@ a {
   text-decoration: underline;
 }
 
-/* ---------- landing screen (overlay on top of index.html) ---------- */
+/* landing screen */
 
     .landing {
       position: fixed;
@@ -29,21 +29,15 @@ a {
       clip-path: inset(0 0 0 0);
     }
 
-    /* added by JS when ENTER is clicked — clips the overlay away
-       instantly, no animation, so it just snaps open */
     .landing.landing--hidden {
       clip-path: inset(0 0 100% 0);
       pointer-events: none;
     }
 
-    /* keeps the page underneath from scrolling while the splash is up */
     body.landing-visible {
       overflow: hidden;
     }
 
-    /* returning visitors this session skip the splash entirely — this is
-       set by the inline script at the top of <body>, before the overlay
-       below even gets parsed, so there's no flash of it appearing */
     html.skip-landing .landing {
       display: none;
     }
@@ -84,7 +78,7 @@ a {
       font-size: 14px;
     }
 
-/* ---------- header ---------- */
+/* header */
 
 .site-header {
   display: flex;
@@ -136,13 +130,12 @@ a {
   text-decoration: underline;
 }
 
-/* the logo + name in the top left is one big link back to the homepage,
-   but it should look exactly like plain text — no underline, no color change */
+
 .header-left {
   text-decoration: none;
 }
 
-/* ---------- marquee ---------- */
+/*  marquee */
 
 .marquee {
   overflow: hidden;
@@ -155,10 +148,7 @@ a {
 .marquee-track {
   display: inline-flex;
   animation: scroll-left 45s linear infinite;
-  /* starts paused so the CSS timer doesn't begin ticking before JS has
-     duplicated the track content — JS un-pauses it once setup is done,
-     avoiding the little jump/hitch that happened when the animation's
-     -50% endpoint was recalculated mid-run against a suddenly wider track */
+ 
   animation-play-state: paused;
 }
 
@@ -171,7 +161,7 @@ a {
   pointer-events: none;
 }
 
-/* pause the scroll when hovering, so people can actually click it */
+
 .marquee:hover .marquee-track {
   animation-play-state: paused;
 }
@@ -181,7 +171,7 @@ a {
     transform: translateX(0);
   }
   to {
-    /* track is duplicated in the HTML, so -50% is exactly one full loop */
+
     transform: translateX(-50%);
   }
 }
@@ -190,6 +180,7 @@ a {
 
 main {
   padding: 24px;
+  padding-top:36px;
 }
 
 main h1 {
@@ -230,11 +221,7 @@ main p {
   text-align: left;
 }
 
-/* only the visible summary row's year column should refuse to wrap —
-   the hidden detail row underneath is a single <td colspan="3"> holding
-   a whole paragraph, and it also happens to be a "last-child", so this
-   rule must NOT apply there or long text gets pushed off-screen instead
-   of wrapping */
+
 .exhibit-row td:last-child {
   white-space: nowrap;
 }
@@ -276,7 +263,6 @@ main p {
   font-size: 14px;
 }
 
-/* every exhibition row can be clicked to open its detail row below it */
 .exhibit-row {
   cursor: pointer;
   scroll-margin-top: 100px;
@@ -286,14 +272,11 @@ main p {
   background: #ddd;
 }
 
-/* while a row's detail is open, keep it the same darker grey as the
-   hover state */
+ 
 .accordion-table tr.exhibit-row.active {
   background: #ddd;
 }
 
-/* the hidden row holding the gallery + caption for one exhibition —
-   stays collapsed until JS adds the "open" class */
 .exhibit-detail {
   display: none;
 }
@@ -302,15 +285,13 @@ main p {
   display: table-row;
 }
 
-/* a bit of extra breathing room above the expanded content, so the row
-   you clicked stays visible right above it — reinforces that this is
-   content unfolding on the same page, not a jump to a new one */
+
+
 .exhibit-detail td {
   padding-top: 20px;
 }
 
-/* photo grid that sits under an exhibition entry — every image is the
-   same HEIGHT */
+
 .exhibit-gallery {
   display: flex;
   flex-wrap: wrap;
@@ -335,7 +316,6 @@ main p {
   margin: 2px 0;
 }
 
-/* responsive video embed  */
 .exhibit-video {
   position: relative;
   width: 100%;
@@ -377,7 +357,6 @@ main p {
   margin: 2px 0;
 }
 
-/* Curatorial Works isn't interactive like the exhibition list  */
 #curatorial-list tr.exhibit-row {
   background: #eee;
   cursor: default;
@@ -387,7 +366,7 @@ main p {
   background: #eee;
 }
 
-/* ---------- lightbox (click any artwork photo to see it larger) ---------- */
+/* ---------- lightbox ---------- */
 
 .exhibit-gallery img,
 .exhibit-side img {
@@ -545,8 +524,7 @@ main p {
     pointer-events: auto;
   }
 
-  /* smaller row height on mobile so more than one image still fits
-     per row on a narrow screen */
+
   .exhibit-gallery img {
     height: 140px;
   }
@@ -596,17 +574,13 @@ main p {
     width: 100%;
   }
 
-  /* only the first header label ("Exhibition") is real text — the other
-     two <th> cells are empty placeholders for the venue/year columns
-     and don't need to render as anything on mobile */
+  
   .accordion-table thead th:nth-child(2),
   .accordion-table thead th:nth-child(3) {
     display: none;
   }
 
-  /* the fixed column widths are a desktop-only trick — on mobile the
-     title needs to use the full row width instead of being squeezed
-     into its 34% desktop column, or it wraps onto a dozen lines */
+
   .accordion-table {
     table-layout: auto;
   }
@@ -616,8 +590,6 @@ main p {
     width: auto;
   }
 
-  /* exhibition list only: drop the venue column entirely on mobile,
-     so each row is just "TITLE (year)" on a single line  */
   .accordion-table tr.exhibit-row {
     display: block;
     width: 100%;
@@ -634,9 +606,7 @@ main p {
   }
 
 
-  /* the gallery/caption detail row also needs to drop its table-row
-     display now that the table itself is no longer a real table on
-     mobile — otherwise it's a stray table-row with no table to belong to */
+  
   .accordion-table .exhibit-detail.open {
     display: block;
     padding-left: 7px;
