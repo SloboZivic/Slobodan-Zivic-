@@ -289,6 +289,7 @@ main p {
 
 .exhibit-detail td {
   padding-top: 20px;
+  padding-bottom: 40px;
 }
 
 
@@ -360,6 +361,7 @@ main p {
 #curatorial-list tr.exhibit-row {
   background: #eee;
   cursor: default;
+
 }
 
 #curatorial-list tr.exhibit-row:hover {
@@ -616,6 +618,7 @@ main p {
   .accordion-table .exhibit-detail td {
     display: block;
     padding-top: 20px;
+    padding-bottom: 40px;
   }
 
   .site-footer {
