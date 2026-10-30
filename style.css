@@ -549,8 +549,10 @@ main p {
 
   .exhibit-table th {
     padding:0px;
-    padding-bottom: 6px;
+    padding-bottom: 10px;
+    padding-top: 6px;
     font-size: 16px;
+
    
   }
 
